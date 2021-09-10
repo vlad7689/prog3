@@ -1,5 +1,5 @@
 
-let gamecolor = prompt('1.original / 2.exzotik / 3.cosmic')
+let gamecolor = 0
 let origclr = ['green','yellow','red','white','#bd682f','#7a3c12','#8a8a8a50','blue']
 let exclr = ['#469c5d','#dbc046','#ab3a3a','#a88859','#a3886c','#806f5e','#c2c2c250','#8ea8d1']
 let cosclr = ['#6d178a','#5c5c5c','#27008a','#0b031a','#005737','#002e1d','#a3812950','#a7ab5c']
@@ -14,15 +14,7 @@ let mashroomArr = []
 let rainArr = []
 let cloudweight = []
 
-if(gamecolor == '1'){
-   color = origclr
-}else if(gamecolor == '2'){
-   color = exclr
-}else if(gamecolor == '3'){
-   color = cosclr
-}else [
-   color = origclr
-]
+
 for (let i = 0; i < n; i++) {
  matrix[i] = []
  for (let j = 0; j < n; j++) {
@@ -44,6 +36,7 @@ for (var j = 0; j < 12; j++) {
    cloudweight.push(Math.floor(Math.random() * 10) + 5)
    matrix[Math.floor(Math.random() * matrix.length)][Math.floor(Math.random() * matrix.length)] = 6
 }
+
 function setup() {
    createCanvas(n * side,n * side)
    background('gold')
@@ -71,7 +64,19 @@ function setup() {
    }
 }
 function draw(){
+   for (let i = 0; i < 3; i++) {
+      document.getElementsByTagName('div')[i].onclick = function coloring() {gamecolor = i + 1}
+   }
    frameRate(3)
+   if(gamecolor == '1'){
+      color = origclr
+   }else if(gamecolor == '2'){
+      color = exclr
+   }else if(gamecolor == '3'){
+      color = cosclr
+   }else [
+      color = origclr
+   ]
    for (let x = 0; x < n; x++) {
       for (let y = 0; y < n; y++) {
          if (matrix[x][y] == 1){
@@ -90,13 +95,12 @@ function draw(){
            fill(color[3])
          }
           rect(y * side,x * side,side,side)
-          if(mashroomArr.length < 20){
+          if(mashroomArr.length < 35){
              console.log(1);
              let newX = Math.floor(Math.random() * matrix.length)
              let newY = Math.floor(Math.random() * matrix.length)
              matrix[newX][newY] = 4
-             let mashr = new Mashroom(newX,newY
-               ,0)
+             let mashr = new Mashroom(newX,newY,0)
              mashroomArr.push(mashr)
           }
       }
@@ -116,7 +120,7 @@ function draw(){
    for (const i in grassArr) {
       grassArr[i].mul();
    }
-    for (const i in grassEaterArr) {
+   for (const i in grassEaterArr) {
       grassEaterArr[i].mul()
       grassEaterArr[i].eat()
    }for (const i in gazanikArr) {
