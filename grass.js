@@ -3,6 +3,7 @@ class Grass {
      this.x = x;
      this.y = y;
      this.multiply = 0;
+     this.multiplySpeed = 8
      this.directions = [
        [this.x - 1, this.y - 1],
        [this.x, this.y - 1],
@@ -26,23 +27,31 @@ class Grass {
          }
        }
      }
-     return found;
-   }
- 
-   mul() {
-     this.multiply++;
+    return found;
+  }
 
-     let emptyCell = this.chooseCell(0); 
-     var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
-     if (newCell && this.multiply >= 8) {
-       let newX = newCell[0]; 
-       let newY = newCell[1]; 
-       matrix[newX][newY] = 1; 
-       let newGrass = new Grass(newX, newY);
-       grassArr.push(newGrass); 
-       this.multiply = 0;
+  mul() {
+    this.multiply++;
+
+    let emptyCell = this.chooseCell(0);
+    var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
+    if (newCell && this.multiply >= 8) {
+      let newX = newCell[0];
+      let newY = newCell[1];
+      if (matrix[newX][newY] == 7) {
+        matrix[newX][newY] = 1;
+        let newGrass = new Grass(newX, newY);
+        newGrass.multiplySpeed = 3
+        grassArr.push(newGrass);
+        this.multiply = 0;
+      }else{
+        matrix[newX][newY] = 1;
+        let newGrass = new Grass(newX, newY);
+        grassArr.push(newGrass);
+        this.multiply = 0;
       }
     }
+  }
 }
 
 
