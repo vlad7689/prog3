@@ -13,6 +13,8 @@ let gazanikArr = []
 let mashroomArr = []
 let rainArr = []
 let cloudweight = []
+let allObjectArr = [grassArr, grassEaterArr, gazanikArr, mashroomArr,rainArr]
+
 
 
 for (let i = 0; i < n; i++) {
@@ -99,10 +101,18 @@ function draw(){
              console.log(1);
              let newX = Math.floor(Math.random() * matrix.length)
              let newY = Math.floor(Math.random() * matrix.length)
+             for (let i = 0; i < allObjectArr.length; i++) {
+               for (let j = 0; j < allObjectArr[i].length; j++) {
+                 if(newX == allObjectArr[i][j].x && newY == allObjectArr[i][j].y){
+                   allObjectArr[i].splice(j, 1)
+                 }
+               }
+             }
              matrix[newX][newY] = 4
              let mashr = new Mashroom(newX,newY,0)
              mashroomArr.push(mashr)
-          }
+             allObjectArr = [grassArr, grassEaterArr, gazanikArr, mashroomArr,rainArr]
+            }
       }
    }
    let j = 0
