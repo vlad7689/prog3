@@ -1,7 +1,6 @@
-class Rain {
+class Rain extends LeavingCreature{
   constructor(x, y) {
-    this.x = x
-    this.y = y
+    super(x,y)
     this.length = 100
     this.directions = [
       [this.x - 1, this.y - 1],

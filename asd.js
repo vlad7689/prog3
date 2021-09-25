@@ -1,3 +1,9 @@
+class LeavingCreature {
+   constructor(x,y){
+      this.x = x
+      this.y = y
+   }
+}
 
 let gamecolor = 0
 let origclr = ['green','yellow','red','white','#bd682f','#7a3c12','#8a8a8a50','blue']
@@ -144,4 +150,6 @@ function draw(){
    }
   
 }
+
+
 

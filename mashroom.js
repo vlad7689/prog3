@@ -1,7 +1,6 @@
-class Mashroom {
+class Mashroom extends LeavingCreature{
     constructor(x, y,bloomfactor) {
-      this.x = x;
-      this.y = y;
+      super(x,y)
       this.multiplyfactor = 0
       this.multiply = 0
       this.bloomfactor = bloomfactor
