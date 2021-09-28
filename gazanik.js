@@ -36,7 +36,7 @@ class Gazanik extends LeavingCreature {
       let emptyCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]; 
   
       if (emptyCell && this.energy > 0) {
-        this.energy-=0.5
+        this.energy-=0.25
         let newX = emptyCell[0]
         let newY = emptyCell[1]
         matrix[newX][newY] = 3
@@ -44,7 +44,6 @@ class Gazanik extends LeavingCreature {
         this.x = newX
         this.y = newY
       }else if(this.energy <= 0){
-        this.energy-=0.5
         this.die()
       }
     }

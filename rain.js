@@ -1,6 +1,6 @@
-class Rain extends LeavingCreature{
+class Rain extends LeavingCreature {
   constructor(x, y) {
-    super(x,y)
+    super(x, y)
     this.length = 100
     this.directions = [
       [this.x - 1, this.y - 1],
@@ -110,7 +110,7 @@ class Rain extends LeavingCreature{
       matrix[newX][newY] = 6
       for (let i = 0; i < allArr.length; i++) {
         for (let j = 0; j < allArr[i].length; j++) {
-          if(newX == allArr[i][j].x && newY == allArr[i][j].y){
+          if (newX == allArr[i][j].x && newY == allArr[i][j].y) {
             allArr[i].splice(j, 1)
           }
         }
@@ -139,6 +139,15 @@ class Rain extends LeavingCreature{
       let newX = newCell[0];
       let newY = newCell[1];
       matrix[newX][newY] = 7;
+      for (let s = 0; s < oceanCoords.length; s++) {
+        if (newX == oceanCoords[s][0] && newY == oceanCoords[s][1]) {
+          matrix[newx][newY] = 8
+          break
+        } else {
+          matrix[newX][newY] = 7
+          break
+        }
+      }
     }
   }
 
