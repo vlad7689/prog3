@@ -6,9 +6,9 @@ class LeavingCreature {
 }
 
 let gamecolor = 0
-let origclr = ['green', 'yellow', 'red', 'white', '#bd682f', '#7a3c12', '#8a8a8a50', 'blue']
-let exclr = ['#469c5d', '#dbc046', '#ab3a3a', '#a88859', '#a3886c', '#806f5e', '#c2c2c250', '#8ea8d1']
-let cosclr = ['#6d178a', '#5c5c5c', '#27008a', '#0b031a', '#005737', '#002e1d', '#a3812950', '#a7ab5c']
+let origclr = ['green', 'yellow', 'red', 'white', '#bd682f', '#7a3c12', '#8a8a8a50', 'blue','lightblue']
+let exclr = ['#469c5d', '#dbc046', '#ab3a3a', '#a88859', '#a3886c', '#806f5e', '#c2c2c250', '#9bcad1','lightgreen']
+let cosclr = ['#6d178a', '#5c5c5c', '#27008a', '#0b031a', '#005737', '#002e1d', '#a3812950', '#a7ab5c','orange']
 let color;
 let n = 120
 let side = 6
@@ -134,7 +134,7 @@ function draw() {
          } else if (matrix[x][y] == 8) {
             fill(color[7])
          } else if (matrix[x][y] == 9) {
-            fill('orange')
+            fill(color[8])
          } else if (matrix[x][y] == 0) {
             fill(color[3])
          }
