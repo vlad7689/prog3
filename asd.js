@@ -19,6 +19,7 @@ let gazanikArr = []
 let mashroomArr = []
 let rainArr = []
 let cloudweight = []
+let fishArr = []
 let allObjectArr = [grassArr, grassEaterArr, gazanikArr, mashroomArr, rainArr]
 let oceanCoords = []
 let earthCoords = []
@@ -60,6 +61,12 @@ for (let i = 0; i < n; i++) {
          }
       }
    }
+   for (let i = 0; i < oceanCoords.length; i++) {
+      let round = Math.floor(Math.random() * 10000)
+      if (round % 2500 == 0) {
+         matrix[oceanCoords[i][0]][oceanCoords[i][1]] = 9
+      }
+   }
 }
 
 for (var j = 0; j < 12; j++) {
@@ -89,6 +96,9 @@ function setup() {
          } else if (matrix[x][y] == 6) {
             var cloud = new Rain(x, y,)
             rainArr.push(cloud)
+         }else if (matrix[x][y] == 9) {
+            var fish = new Fish(x, y)
+            fishArr.push(fish)
          }
       }
    }
@@ -123,6 +133,8 @@ function draw() {
             fill(color[7])
          } else if (matrix[x][y] == 8) {
             fill(color[7])
+         } else if (matrix[x][y] == 9) {
+            fill('orange')
          } else if (matrix[x][y] == 0) {
             fill(color[3])
          }
@@ -148,7 +160,7 @@ function draw() {
          allObjectArr = [grassArr, grassEaterArr, gazanikArr, mashroomArr, rainArr]
 
          for (let s = 0; s < oceanCoords.length; s++) {
-            if (x == oceanCoords[s][0] && y == oceanCoords[s][1] && matrix[x][y] != 8 && matrix[x][y] != 6) {
+            if (x == oceanCoords[s][0] && y == oceanCoords[s][1] && matrix[x][y] != 8 && matrix[x][y] != 6 && matrix[x][y] != 9) {
                matrix[x][y] = 8
             }
          }
@@ -180,6 +192,9 @@ function draw() {
    } for (const i in rainArr) {
       rainArr[i].cloudMove()
       rainArr[i].raining()
+   }for (const i in fishArr) {
+      fishArr[i].mul()
+      fishArr[i].eat()
    }
 
 }
