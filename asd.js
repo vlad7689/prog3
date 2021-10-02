@@ -10,8 +10,8 @@ let origclr = ['green', 'yellow', 'red', 'white', '#bd682f', '#7a3c12', '#8a8a8a
 let exclr = ['#469c5d', '#dbc046', '#ab3a3a', '#a88859', '#a3886c', '#806f5e', '#c2c2c250', '#8ea8d1']
 let cosclr = ['#6d178a', '#5c5c5c', '#27008a', '#0b031a', '#005737', '#002e1d', '#a3812950', '#a7ab5c']
 let color;
-let n = 100
-let side = 7
+let n = 120
+let side = 6
 let matrix = []
 let grassArr = []
 let grassEaterArr = []
@@ -63,7 +63,7 @@ for (let i = 0; i < n; i++) {
    }
    for (let i = 0; i < oceanCoords.length; i++) {
       let round = Math.floor(Math.random() * 10000)
-      if (round % 2500 == 0) {
+      if (round % 1000 == 0) {
          matrix[oceanCoords[i][0]][oceanCoords[i][1]] = 9
       }
    }
