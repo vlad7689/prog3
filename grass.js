@@ -39,7 +39,6 @@ class Grass extends LeavingCreature  {
       if (matrix[newX][newY] == 7) {
         matrix[newX][newY] = 1;
         let newGrass = new Grass(newX, newY);
-        newGrass.multiplySpeed = 3
         grassArr.push(newGrass);
         this.multiply = 0;
       }else{

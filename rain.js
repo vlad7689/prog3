@@ -135,16 +135,18 @@ class Rain extends LeavingCreature {
   raining() {
     let emptyCell = this.chooseCell(0, 1);
     var newCell = emptyCell[Math.floor(Math.random() * emptyCell.length)];
-    if (newCell) {
+    if (newCell && temperature < 10) {
       let newX = newCell[0];
       let newY = newCell[1];
-      matrix[newX][newY] = 7;
       for (let s = 0; s < oceanCoords.length; s++) {
-        if (newX == oceanCoords[s][0] && newY == oceanCoords[s][1]) {
+        if (newX == oceanCoords[s][0] && newY == oceanCoords[s][1] && temperature > -5) {
           matrix[newx][newY] = 8
           break
-        } else {
+        } else if( temperature>-5 ) {
           matrix[newX][newY] = 7
+          break
+        }else if(temperature < -10){
+          matrix[newX][newY] = 10
           break
         }
       }

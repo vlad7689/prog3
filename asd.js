@@ -6,13 +6,15 @@ class LeavingCreature {
 }
 
 let gamecolor = 0
-let origclr = ['green', 'yellow', 'red', 'white', '#bd682f', '#7a3c12', '#8a8a8a50', 'blue','lightblue']
-let exclr = ['#469c5d', '#dbc046', '#ab3a3a', '#a88859', '#a3886c', '#806f5e', '#c2c2c250', '#9bcad1','lightgreen']
-let cosclr = ['#6d178a', '#5c5c5c', '#27008a', '#0b031a', '#005737', '#002e1d', '#a3812950', '#a7ab5c','orange']
+let origclr = ['green', 'yellow', 'red', 'white', '#bd682f', '#7a3c12', '#8a8a8a50', 'blue', 'lightblue','lightgrey']
+let exclr = ['#469c5d', '#dbc046', '#ab3a3a', '#a88859', '#a3886c', '#806f5e', '#c2c2c250', '#9bcad1', 'lightgreen']
+let cosclr = ['#6d178a', '#5c5c5c', '#27008a', '#0b031a', '#005737', '#002e1d', '#a3812950', '#a7ab5c', 'orange']
 let color;
 let n = 120
 let side = 6
 let matrix = []
+let temperature = -15
+let tempTime = 0
 let grassArr = []
 let grassEaterArr = []
 let gazanikArr = []
@@ -23,7 +25,6 @@ let fishArr = []
 let allObjectArr = [grassArr, grassEaterArr, gazanikArr, mashroomArr, rainArr]
 let oceanCoords = []
 let earthCoords = []
-
 
 for (let i = 0; i < n; i++) {
    matrix[i] = []
@@ -96,7 +97,7 @@ function setup() {
          } else if (matrix[x][y] == 6) {
             var cloud = new Rain(x, y,)
             rainArr.push(cloud)
-         }else if (matrix[x][y] == 9) {
+         } else if (matrix[x][y] == 9) {
             var fish = new Fish(x, y)
             fishArr.push(fish)
          }
@@ -104,10 +105,24 @@ function setup() {
    }
 }
 function draw() {
+   frameRate(3)
+   console.log(temperature);
    for (let i = 0; i < 3; i++) {
       document.getElementsByTagName('div')[i].onclick = function coloring() { gamecolor = i + 1 }
    }
-   frameRate(3)
+   
+   if (tempTime >= 30) {
+      temperature += Math.floor(Math.random() * 40 - 20)
+      tempTime = 0
+      if (temperature > 20) {
+         temperature = 20
+      } else if (temperature < -20) {
+         temperature = -20
+      }
+   } else {
+      tempTime++
+   }
+
    if (gamecolor == '1') {
       color = origclr
    } else if (gamecolor == '2') {
@@ -135,11 +150,16 @@ function draw() {
             fill(color[7])
          } else if (matrix[x][y] == 9) {
             fill(color[8])
+         }else if (matrix[x][y] == 10) {
+            fill(color[9])
          } else if (matrix[x][y] == 0) {
             fill(color[3])
          }
          rect(y * side, x * side, side, side)
-         if (mashroomArr.length < 35) {
+         if(matrix[x][y] == 10 && temperature > -5 ){
+            matrix[x][y] = 7
+         }
+         if (mashroomArr.length < 35 && temperature > -5) {
             console.log(1);
             let newX = earthCoords[Math.floor(Math.random() * earthCoords.length)][0]
             let newY = earthCoords[Math.floor(Math.random() * earthCoords.length)][1]
@@ -164,6 +184,7 @@ function draw() {
                matrix[x][y] = 8
             }
          }
+
       }
    }
    let j = 0
@@ -192,7 +213,7 @@ function draw() {
    } for (const i in rainArr) {
       rainArr[i].cloudMove()
       rainArr[i].raining()
-   }for (const i in fishArr) {
+   } for (const i in fishArr) {
       fishArr[i].mul()
       fishArr[i].eat()
    }
